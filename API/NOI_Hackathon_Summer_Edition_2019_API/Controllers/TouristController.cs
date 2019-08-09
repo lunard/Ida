@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
 {
@@ -56,7 +52,7 @@ namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
 																			   },
 															   NextQuestion2 = new Question
 																			   {
-																				   Q = "Luxury Treats",
+																				   Q = "Luxury Treats"
 																			   }
 														   },
 										   NextQuestion2 = new Question
@@ -65,13 +61,6 @@ namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
 														   }
 									   }
 				   };
-		}
-
-		// GET api/values/5
-		[HttpGet("{id}")]
-		public ActionResult<string> Get(int id)
-		{
-			return "value";
 		}
 
 		// POST api/values
