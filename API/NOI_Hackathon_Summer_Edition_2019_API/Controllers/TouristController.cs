@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using NOI_Hackathon_Summer_Edition_2019_API.Models;
 using NOI_Hackathon_Summer_Edition_2019_API.Models.ViewModels;
 
 namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
@@ -17,41 +18,51 @@ namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
 					  {
 						  NextQuestion1 = new Question
 										  {
+											  Id = 1,
 											  Q = "Historical cities",
 											  NextQuestion1 = new Question
 															  {
+																  Id = 2,
 																  Q = "Local Eats",
 																  NextQuestion1 = new Question
 																				  {
+																					  Id = 3,
 																					  Q = "Famed Landmarks"
 																				  },
 																  NextQuestion2 = new Question
 																				  {
+																					  Id = 4,
 																					  Q = "Cool neighborhoods"
 																				  }
 															  },
 											  NextQuestion2 = new Question
 															  {
+																  Id = 5,
 																  Q = "Luxury Treats"
 															  }
 										  },
 						  NextQuestion2 = new Question
 										  {
+											  Id = 6,
 											  Q = "Beautiful landscapes",
 											  NextQuestion1 = new Question
 															  {
+																  Id = 7,
 																  Q = "Supreme relaxation",
 																  NextQuestion1 = new Question
 																				  {
+																					  Id = 8,
 																					  Q = "Impressive local music"
 																				  },
 																  NextQuestion2 = new Question
 																				  {
+																					  Id = 9,
 																					  Q = "Luxury Treats"
 																				  }
 															  },
 											  NextQuestion2 = new Question
 															  {
+																  Id = 10,
 																  Q = "Tremendous Hike in the mountains"
 															  }
 										  }
@@ -107,7 +118,7 @@ DIRECTIONS
 
 Drive through Val Sarentino (Sarntal) Valley up to the hamlet of Sonvigo (Aberstückl) (1,329 m) and on to Lahnerhof Farm (1,566 m). From there follow Trail No. 7A, turning slightly left through the woods uphill to a knoll with a cross (called Kirchberg, 1,850 m). Continue on the partly flat and uphill slopes and eroding ditches to Malga Anteran (Anteranalm) mountain pasture (2,053 m; 1.5 hours from Lahnerhof). From the hut, take the steep Trail No. 7 up to the fork, and then turn right at the fork. Continue on Trail No. 7 (a well-marked trail), past stony grassy slopes and finally over craggy ground and boulders in switchbacks up to the summit at 2,781 m; just under 2 hours from the pasture; 3.5 hours from Lahnerhof Farm. Descent: Return using the same trail; about 2.5 hours from the summit.",
 							  AdditionalInformation = "Small parking area at Maso Lahner (Lahnerhof) Farm in the district of Sonvigo (Aberstückl)"
-						  },
+						  }
 					  });
 		}
 	}

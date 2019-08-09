@@ -1,4 +1,5 @@
-﻿namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers {
+﻿namespace NOI_Hackathon_Summer_Edition_2019_API.Models
+{
 	public class UniqueExperiences
 	{
 		public int Id { get; set; }
