@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NOI_Hackathon_Summer_Edition_2019_API.Models.ViewModels;
 
 namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
 {
@@ -14,8 +15,8 @@ namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
 	public class TouristController : ControllerBase
 	{
 		// GET api/values
-		[HttpGet("questionTree")]
-		public ActionResult<Question> GetQuestionTree()
+		[HttpPost("questionTree")]
+		public ActionResult<Question> GetQuestionTree([FromBody] FaceRecognitionFilter faceRecognitionFilter)
 		{
 			//this tree is static for now, but in a productive environment options will be influenced by the kiosk location
 			return new Question
