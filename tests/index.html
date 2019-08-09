@@ -1,0 +1,81 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <!--
+	Ideally these elements aren't created until it's confirmed that the 
+	client supports video/camera, but for the sake of illustrating the 
+	elements involved, they are created with markup (not JavaScript)
+    -->
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="snap">Snap Photo</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</body>
+
+<script>
+
+    // Grab elements, create settings, etc.
+    var video = document.getElementById('video');
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    // Get access to the camera!
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Not adding `{ audio: true }` since we only want video now
+        navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+            //video.src = window.URL.createObjectURL(stream);
+            video.srcObject = stream;
+            video.play();
+        });
+    } else {
+        console.error("No media devices found");
+    }
+
+    // Request parameters.
+    var params = {
+        "returnFaceId": "false",
+        "returnFaceLandmarks": "false",
+        "returnFaceAttributes": "age,gender,emotion"
+    };
+
+    document.getElementById("snap").addEventListener("click", function () {
+        context.drawImage(video, 0, 0, 640, 480);
+        let data = canvas.toDataURL('image/jpeg');
+
+        var faceAPIKey = (new URLSearchParams(window.location.search)).get('faceAPIKey');
+
+        fetch(data)
+            .then(res => res.blob())
+            .then(blobData => {
+                $.post({
+                    url: "https://westeurope.api.cognitive.microsoft.com/face/v1.0/detect?" + $.param(params),
+                    contentType: "application/octet-stream",
+                    headers: {
+                        'Ocp-Apim-Subscription-Key': faceAPIKey
+                    },
+                    processData: false,
+                    data: blobData
+                })
+                .done(function (data) {
+
+                    var faceResult = {
+                        peopleCount: data.length
+                    };
+
+                    console.log("Face API result: ", faceResult, data);
+
+                })
+                .fail(function (err) {
+                    console.err("Face API error");
+                })
+            });
+
+    });
+</script>
+
+</html>
