@@ -14,7 +14,7 @@ namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2", "value3" };
+            return new string[] { "value1", "value2", "value3", "value4" };
         }
 
         // GET api/values/5
