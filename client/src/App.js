@@ -5,6 +5,7 @@ function App() {
   return (
     <div className="App">
       <h1>IDA</h1>
+      <button onClick={() => window.testElectron()}>test</button>
     </div>
   );
 }
