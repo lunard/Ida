@@ -30,7 +30,7 @@ namespace NOI_Hackathon_Summer_Edition_2019_API.Models.ViewModels
         [DataMember(Name = "gender")]
         public Gender Gender { get; set; }
 
-        [DataMember(Name = "gender")]
+        [DataMember(Name = "age")]
         public int Age { get; set; }
 
     }
