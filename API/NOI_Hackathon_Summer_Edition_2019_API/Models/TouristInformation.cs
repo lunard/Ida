@@ -1,0 +1,10 @@
+﻿using NOI_Hackathon_Summer_Edition_2019_API.Models.ViewModels;
+
+namespace NOI_Hackathon_Summer_Edition_2019_API.Models
+{
+	public class TouristInformation
+	{
+		public FaceRecognitionFilter FaceRecognitionFilter { get; set; }
+		public int[] QuestionResponseIds { get; set; }
+	}
+}
