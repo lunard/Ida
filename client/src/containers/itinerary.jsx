@@ -1,19 +1,26 @@
 import React from 'react';
 
-const Itinerary = ({ restart }) => {
+const Itinerary = ({ restart, info }) => {
   return (
     <div>
       <h1>Itinerary</h1>
-      <ul>
-        <li>Museum in Meran</li>
-        <li>Hiking in Schenna</li>
-        <li>Dinner at Lido Schenna</li>
-      </ul>
+      <div>
+        {info.itinerary &&
+          info.itinerary.map(it => (
+            <div key={it.id}>
+              <h1>{it.name}</h1>
+              <p>{it.description}</p>
+              <p>
+                <i>{it.additionalInformation}</i>
+              </p>
+            </div>
+          ))}
+      </div>
       <button>print</button>
       <button>send to email</button>
       <button onClick={restart}>restart</button>
     </div>
   );
-}
+};
 
 export default Itinerary;

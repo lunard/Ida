@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 
+import faceAnalysis from '../utils/face-analysis';
+
 var params = {
   returnFaceId: 'false',
   returnFaceLandmarks: 'false',
@@ -10,7 +12,7 @@ var params = {
 class Camera extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { img: null, loading: false };
+    this.state = { img: null, loading: false, w: 640, h: 480 };
     this.video = React.createRef();
     this.take = this.take.bind(this);
   }
@@ -28,9 +30,10 @@ class Camera extends React.Component {
 
   take() {
     const next = this.props.next;
+    const setState = this.setState;
     const canvas = document.createElement('canvas');
-    canvas.width = this.video.current.offsetWidth;
-    canvas.height = this.video.current.offsetHeight;
+    canvas.width = this.state.w;
+    canvas.height = this.state.h;
     const context = canvas.getContext('2d');
     context.drawImage(this.video.current, 0, 0, canvas.width, canvas.height);
     const data = canvas.toDataURL('image/jpeg');
@@ -54,14 +57,23 @@ class Camera extends React.Component {
           processData: false,
           data: blobData,
         })
-          .done(function(data) {
-            var faceResult = {
-              peopleCount: data.length,
-            };
-            next();
-            console.log('Face API result: ', faceResult, data);
+          .done((data) => {
+            const faceResult = faceAnalysis(data);
+            $.post({
+              dataType: 'json',
+              contentType: 'application/json',
+              url: 'https://lunard.ddns.net/NOI_Hackathon_Summer_Edition_2019/api/api/tourist/questionTree',
+              data: JSON.stringify(faceResult),
+            })
+              .done((questions) => {
+                this.props.done(questions, faceResult);
+              })
+              .fail((err) => {
+                this.setState({ loading: false });
+                console.error('Face API error');
+              });
           })
-          .fail(function(err) {
+          .fail((err) => {
             this.setState({ loading: false });
             console.error('Face API error');
           });
@@ -69,13 +81,17 @@ class Camera extends React.Component {
   }
 
   render() {
-    const { img, loading } = this.state;
+    const { img, loading, w, h } = this.state;
     return (
       <div>
-        <video className="camera-video" ref={this.video} id="video" autoPlay />
-        {!loading ? <div className="camera-button" onClick={this.take}>
-          TAKE
-        </div> : <div>loading</div>}
+        <video width={w} height={h} className="camera-video" ref={this.video} id="video" autoPlay />
+        {!loading ? (
+          <div className="camera-button" onClick={this.take}>
+            TAKE
+          </div>
+        ) : (
+          <div>loading</div>
+        )}
       </div>
     );
   }

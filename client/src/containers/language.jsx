@@ -1,14 +1,19 @@
 import React from 'react';
 
-const langs = ['it', 'en', 'de'];
+import langSrc from '../assets/lang.svg';
+
+const langs = ['Italiano', 'English', 'Deutsch'];
 
 const Language = ({ next }) => {
   return (
-    <div>
-      <h1>Language</h1>
-      {langs.map(lang => (
-        <button onClick={next}>{lang}</button>
-      ))}
+    <div className="language-page" style={{backgroundImage: `url('${langSrc}')`}}>
+      <div className="language-buttons">
+        {langs.map(lang => (
+          <button className="button-language" key={lang} onClick={next}>
+            {lang}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
