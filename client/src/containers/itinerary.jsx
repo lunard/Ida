@@ -1,8 +1,11 @@
 import React from 'react';
+import langSrc from '../assets/question.svg';
 
 const Itinerary = ({ restart, info }) => {
   return (
-    <div>
+    <div
+      className="choice-page"
+      style={{ backgroundImage: `url('${langSrc}')` }}>
       <h1>Itinerary</h1>
       <div>
         {info.itinerary &&

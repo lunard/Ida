@@ -2,6 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 
 import faceAnalysis from '../utils/face-analysis';
+import langSrc from '../assets/camera.svg';
+import buttonSrc from '../assets/button.png';
 
 var params = {
   returnFaceId: 'false',
@@ -34,64 +36,62 @@ class Camera extends React.Component {
     const canvas = document.createElement('canvas');
     canvas.width = this.state.w;
     canvas.height = this.state.h;
+
+    ////////////////
     const context = canvas.getContext('2d');
     context.drawImage(this.video.current, 0, 0, canvas.width, canvas.height);
-    const data = canvas.toDataURL('image/jpeg');
-    this.setState({ img: data });
     const faceAPIKey = new URLSearchParams(window.location.search).get(
       'faceAPIKey'
     );
     this.video.current.pause();
     this.setState({ loading: true });
-    fetch(data)
-      .then(res => res.blob())
-      .then(blobData => {
-        $.post({
-          url:
-            'https://westeurope.api.cognitive.microsoft.com/face/v1.0/detect?' +
-            $.param(params),
-          contentType: 'application/octet-stream',
-          headers: {
-            'Ocp-Apim-Subscription-Key': '1d33abc84bdb49d5b34870cda25e724b',
-          },
-          processData: false,
-          data: blobData,
-        })
-          .done((data) => {
-            const faceResult = faceAnalysis(data);
-            $.post({
-              dataType: 'json',
-              contentType: 'application/json',
-              url: 'https://lunard.ddns.net/NOI_Hackathon_Summer_Edition_2019/api/api/tourist/questionTree',
-              data: JSON.stringify(faceResult),
-            })
-              .done((questions) => {
-                this.props.done(questions, faceResult);
-              })
-              .fail((err) => {
-                this.setState({ loading: false });
-                console.error('Face API error');
-              });
+    canvas.toBlob((blobData) => {
+      $.post({
+        url:
+          'https://westeurope.api.cognitive.microsoft.com/face/v1.0/detect?' +
+          $.param(params),
+        contentType: 'application/octet-stream',
+        headers: {
+          'Ocp-Apim-Subscription-Key': '1d33abc84bdb49d5b34870cda25e724b',
+        },
+        processData: false,
+        data: blobData,
+      })
+        .done((data) => {
+          const faceResult = faceAnalysis(data);
+          $.post({
+            dataType: 'json',
+            contentType: 'application/json',
+            url: 'https://lunard.ddns.net/NOI_Hackathon_Summer_Edition_2019/api/api/tourist/questionTree',
+            data: JSON.stringify(faceResult),
           })
-          .fail((err) => {
-            this.setState({ loading: false });
-            console.error('Face API error');
-          });
-      });
+            .done((questions) => {
+              this.props.done(questions, faceResult);
+            })
+            .fail((err) => {
+              this.setState({ loading: false });
+              console.error('Face API error');
+            });
+        })
+        .fail((err) => {
+          this.setState({ loading: false });
+          console.error('Face API error');
+        });
+    });
   }
 
   render() {
     const { img, loading, w, h } = this.state;
     return (
-      <div>
-        <video width={w} height={h} className="camera-video" ref={this.video} id="video" autoPlay />
-        {!loading ? (
-          <div className="camera-button" onClick={this.take}>
-            TAKE
-          </div>
-        ) : (
-          <div>loading</div>
-        )}
+      <div className="video-page" style={{backgroundImage: `url('${langSrc}')`}}>
+        <div className="video-cont">
+          <video width={w} height={h} className="camera-video" ref={this.video} id="video" autoPlay />
+          {!loading ? (
+            <img className="camera-button" src={buttonSrc} onClick={this.take} />
+          ) : (
+            <div>loading</div>
+          )}
+        </div>
       </div>
     );
   }
