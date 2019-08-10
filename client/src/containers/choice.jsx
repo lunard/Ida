@@ -89,7 +89,7 @@ const Choice = ({ questions, info, next }) => {
         <div
           onClick={() => select(qs.nextQuestion1)}
           style={{
-            backgroundImage: `linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('${qs.nextQuestion1.imageUrl}')`,
+            backgroundImage: `linear-gradient(0deg,rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${qs.nextQuestion1.imageUrl}')`,
           }}
         >
           {qs.nextQuestion1.q}
@@ -98,7 +98,7 @@ const Choice = ({ questions, info, next }) => {
         <div
           onClick={() => select(qs.nextQuestion2)}
           style={{
-            backgroundImage: `linear-gradient(0deg,rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url('${qs.nextQuestion2.imageUrl}')`,
+            backgroundImage: `linear-gradient(0deg,rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url('${qs.nextQuestion2.imageUrl}')`,
           }}
         >
           {qs.nextQuestion2.q}
