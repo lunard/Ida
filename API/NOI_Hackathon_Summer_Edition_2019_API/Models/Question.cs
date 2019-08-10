@@ -6,5 +6,6 @@
 		public int Id { get; set; }
 		public Question NextQuestion1 { get; set; }
 		public Question NextQuestion2 { get; set; }
-	}
+        public string ImageUrl { get; set; }
+    }
 }
