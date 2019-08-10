@@ -110,3 +110,16 @@
   font-size: 16px;
   margin: 0 10px 0 0px;
 }
+
+.itinerary {
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  width: 80%;
+  background-color: #d1e1ef;
+  padding: 24px;
+  overflow-y: auto;
+  border-radius: 20px; 
+}
