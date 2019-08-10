@@ -1,6 +1,8 @@
 import React from 'react';
 import langSrc from '../assets/question.svg';
 import girlSrc from '../assets/girl.png';
+import mapSrc from '../assets/Map.png';
+
 
 const Itinerary = ({ restart, info }) => {
   return (
@@ -20,6 +22,9 @@ const Itinerary = ({ restart, info }) => {
               </div>
             </div>
           ))}
+          <br />
+          <br />
+          <img src={mapSrc} />
       </div>
     </div>
   );
