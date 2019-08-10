@@ -56,21 +56,25 @@ namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
                     {
                         Id = 7,
                         Q = "Supreme relaxation",
+                        ImageUrl = GetQuestionImageDownloadUri("q2-1"),
                         NextQuestion1 = new Question
                         {
                             Id = 8,
-                            Q = "Impressive local music"
+                            Q = "Impressive local music",
+                            ImageUrl = GetQuestionImageDownloadUri("q2-1-1")
                         },
                         NextQuestion2 = new Question
                         {
                             Id = 9,
-                            Q = "Luxury Treats"
+                            Q = "Luxury Treats",
+                            ImageUrl = GetQuestionImageDownloadUri("q2-1-2")
                         }
                     },
                     NextQuestion2 = new Question
                     {
                         Id = 10,
-                        Q = "Tremendous Hike in the mountains"
+                        Q = "Tremendous Hike in the mountains",
+                        ImageUrl = GetQuestionImageDownloadUri("q2-2")
                     }
                 }
             });
