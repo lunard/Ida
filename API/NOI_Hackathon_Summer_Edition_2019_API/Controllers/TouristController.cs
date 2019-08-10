@@ -136,8 +136,8 @@ Drive through Val Sarentino (Sarntal) Valley up to the hamlet of Sonvigo (Aberst
         }
 
         private string GetQuestionImageDownloadUri(string iA)
-        {       
-            return Path.Combine(HttpContext.Request.Path.Value, Url.Action("GetImage", new { imageAlias = iA }));
+        {
+            return $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}{Url.Action("GetImage", new { imageAlias = iA })}";
         }
     }
 }
