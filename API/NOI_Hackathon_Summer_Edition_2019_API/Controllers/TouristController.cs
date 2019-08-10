@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using NOI_Hackathon_Summer_Edition_2019_API.Models;
 using NOI_Hackathon_Summer_Edition_2019_API.Models.ViewModels;
@@ -135,12 +136,8 @@ Drive through Val Sarentino (Sarntal) Valley up to the hamlet of Sonvigo (Aberst
         }
 
         private string GetQuestionImageDownloadUri(string iA)
-        {
-            return new System.UriBuilder(HttpContext.Request.Path.Value)
-            {
-                Path = Url.Action("GetImage", new { imageAlias = iA }),
-                Query = null,
-            }.ToString();
+        {       
+            return Path.Combine(HttpContext.Request.Path.Value, Url.Action("GetImage", new { imageAlias = iA }));
         }
     }
 }
