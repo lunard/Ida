@@ -7,7 +7,7 @@ const Itinerary = ({ restart, info }) => {
       className="choice-page"
       style={{ backgroundImage: `url('${langSrc}')` }}>
       <h1>Itinerary</h1>
-      <div>
+      <div className="itinerary">
         {info.itinerary &&
           info.itinerary.map(it => (
             <div key={it.id}>
