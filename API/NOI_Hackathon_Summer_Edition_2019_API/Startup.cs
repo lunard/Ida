@@ -37,6 +37,7 @@ namespace NOI_Hackathon_Summer_Edition_2019_API
 		{
 			if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
+            app.UseStaticFiles();
 
 			app.UseCors("disableCORS");
 
