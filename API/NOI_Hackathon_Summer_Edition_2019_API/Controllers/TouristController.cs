@@ -63,7 +63,7 @@ namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
 											  NextQuestion2 = new Question
 															  {
 																  Id = 10,
-																  Q = "Tremendous Hike in the mountains"
+																  Q = "Tremendous hike in the mountains"
 															  }
 										  }
 					  });
