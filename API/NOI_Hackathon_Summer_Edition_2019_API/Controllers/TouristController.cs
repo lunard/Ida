@@ -20,37 +20,37 @@ namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
                 {
                     Id = 1,
                     Q = "Historical cities",
-                    ImageUrl = Url.Action("GetImage", new { imageAlias = "q1" }),
+                    ImageUrl = GetQuestionImageDownloadUri("q1"),
                     NextQuestion1 = new Question
                     {
                         Id = 2,
                         Q = "Local Eats",
-                        ImageUrl = Url.Action("GetImage", new { imageAlias = "q1-1" }),
+                        ImageUrl = GetQuestionImageDownloadUri("q1-1"),
                         NextQuestion1 = new Question
                         {
                             Id = 3,
                             Q = "Famed Landmarks",
-                            ImageUrl = Url.Action("GetImage", new { imageAlias = "q1-1-1" })
+                            ImageUrl = GetQuestionImageDownloadUri("q1-1-1")
                         },
                         NextQuestion2 = new Question
                         {
                             Id = 4,
                             Q = "Cool neighborhoods",
-                            ImageUrl = Url.Action("GetImage", new { imageAlias = "q1-1-2" })
+                            ImageUrl = GetQuestionImageDownloadUri("q1-1-2")
                         }
                     },
                     NextQuestion2 = new Question
                     {
                         Id = 5,
                         Q = "Luxury Treats",
-                        ImageUrl = Url.Action("GetImage", new { imageAlias = "q1-2" })
+                        ImageUrl = GetQuestionImageDownloadUri("q1-2")
                     }
                 },
                 NextQuestion2 = new Question
                 {
                     Id = 6,
                     Q = "Beautiful landscapes",
-                    ImageUrl = Url.Action("GetImage", new { imageAlias = "q2" }),
+                    ImageUrl = GetQuestionImageDownloadUri("q2"),
                     NextQuestion1 = new Question
                     {
                         Id = 7,
@@ -78,7 +78,7 @@ namespace NOI_Hackathon_Summer_Edition_2019_API.Controllers
         [HttpGet("questionimage")]
         public ActionResult GetImage(string imageAlias)
         {
-            return File($"~/Assets/WizardResources/{imageAlias}", "image/jpeg");
+            return File($"~/Assets/WizardResources/{imageAlias}.jpg", "image/jpeg");
         }
 
         // POST api/values
@@ -132,6 +132,15 @@ Drive through Val Sarentino (Sarntal) Valley up to the hamlet of Sonvigo (Aberst
                               AdditionalInformation = "Small parking area at Maso Lahner (Lahnerhof) Farm in the district of Sonvigo (Aberstückl)"
                           }
                       });
+        }
+
+        private string GetQuestionImageDownloadUri(string iA)
+        {
+            return new System.UriBuilder(HttpContext.Request.Path.Value)
+            {
+                Path = Url.Action("GetImage", new { imageAlias = iA }),
+                Query = null,
+            }.ToString();
         }
     }
 }
